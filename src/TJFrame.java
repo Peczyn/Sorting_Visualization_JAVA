@@ -1,15 +1,19 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collections;
 
 public class TJFrame extends JFrame {
+    public static boolean sorting = false;
+
     TJPanel tjpanel = new TJPanel();
+    static int ArraySize = 100;
 
     TJFrame(){
         super("OKNO");
         buildGui();
+//        (new BubbleSortActive()).start();
     }
 
     void buildGui()
@@ -17,39 +21,109 @@ public class TJFrame extends JFrame {
         JPanel root = new JPanel();
         root.setLayout(new BorderLayout());
 
+
         JPanel northPanel = new JPanel();
 
-        JButton start = new JButton("start");
-        northPanel.add(start);
-        JButton stop = new JButton("stop");
+        Integer[] options = {10,50,100,200,300};
+        JComboBox<Integer> comboBox = new JComboBox<>(options);
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Maze.arr.clear();
+                ArraySize = (int) comboBox.getSelectedItem();
+                Maze.generateMaze(ArraySize);
+            }
+        });
+        northPanel.add(comboBox);
+
+        JButton ShuffleButton = new JButton("Shuffle");
+        ShuffleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!sorting)
+                {
+                    Collections.shuffle(Maze.arr);
+                }
+
+            }
+        });
+        northPanel.add(ShuffleButton);
+
+
+        JButton BubbleSort = new JButton("BubbleSort Start");
+        BubbleSort.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!sorting)
+                {
+                    (new BubbleSortThread()).start();
+                    Maze.isRunning=true;
+                }
+                else{
+                    Maze.isRunning=true;
+                }
+            }
+        });
+        northPanel.add(BubbleSort);
+
+
+        JButton SelectionSort = new JButton("SelectionSort Start");
+        SelectionSort.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!sorting)
+                {
+                    (new SelectionSortThread()).start();
+                    Maze.isRunning=true;
+                }
+                else{
+                    Maze.isRunning=true;
+                }
+
+            }
+        });
+        northPanel.add(SelectionSort);
+
+
+        JButton stop = new JButton("Stop");
+        stop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Maze.isRunning=false;
+            }
+        });
         northPanel.add(stop);
 
         root.add(northPanel, BorderLayout.NORTH);
         root.add(tjpanel, BorderLayout.CENTER);
 
         setContentPane(root);
+    }
 
+    class BubbleSortThread extends Thread{
+        @Override
+        public void run(){
+            sorting = true;
+            Maze.bubbleSort();
+        }
+    }
+
+    class SelectionSortThread extends Thread{
+        @Override
+        public void run(){
+            sorting = true;
+            Maze.selectionSort();
+        }
     }
 
     public static void main(String[] args){
-        for(int i=0; i<612; i++)
-        {
-            Maze.arr.add(i);
-        }
-        Collections.shuffle(Maze.arr);
-
-
+        Maze.generateMaze(ArraySize);
 
         TJFrame frame = new TJFrame();
-
-        frame.setSize(700,700);
+        frame.setSize(1200,1000);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);
         frame.setVisible(true);
-
-
-        Maze.bubbleSort();
-
     }
 }

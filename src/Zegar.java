@@ -18,6 +18,7 @@ public class Zegar extends JPanel {
         @Override
         public void run() {
             for(;;){
+
                 time = LocalTime.now();
                 System.out.printf("%02d:%02d:%02d\n",time.getHour(),time.getMinute(),time.getSecond());
 
@@ -35,6 +36,7 @@ public class Zegar extends JPanel {
 
 
     public void paintComponent(Graphics g){
+        super.paintComponent(g);
         Graphics2D g2d=(Graphics2D)g;
         g2d.translate(getWidth()/2,getHeight()/2); //to nam służy do przeniesienia zegara z (0,0) na środek ekranu
 

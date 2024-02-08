@@ -10,7 +10,7 @@ public class TJPanel extends JPanel{
 
         for(int i = 0; i<Maze.arr.size(); i++)
         {
-            g2d.drawRect(i*getWidth()/Maze.arr.size(),getHeight(),getWidth()/Maze.arr.size(),-getHeight()/(Maze.arr.size()+1)* Maze.arr.get(i));
+            g2d.drawRect(i*getWidth()/Maze.arr.size(), getHeight(),getWidth()/Maze.arr.size(),-getHeight()/(Maze.arr.size()+1)* Maze.arr.get(i));
         }
 
     }
@@ -18,7 +18,7 @@ public class TJPanel extends JPanel{
     class AnimationThread extends Thread{
 
         public void run(){
-            for(;;)
+            while(true)
             {
 //                try {
 //                    sleep(1000);
