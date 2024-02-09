@@ -30,10 +30,13 @@ public class TJFrame extends JFrame {
         comboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Maze.arr.clear();
-                ArraySize = (int) comboBox.getSelectedItem();
+                if(!sorting)
+                {
+                    Maze.arr.clear();
+                    ArraySize = (int) comboBox.getSelectedItem();
 
-                Maze.generateMaze(ArraySize);
+                    Maze.generateMaze(ArraySize);
+                }
             }
         });
         northPanel.add(comboBox);
@@ -136,7 +139,7 @@ public class TJFrame extends JFrame {
         setContentPane(root);
     }
 
-    class BubbleSortThread extends Thread{
+    static class BubbleSortThread extends Thread{
         @Override
         public void run(){
             sorting = true;
@@ -144,7 +147,7 @@ public class TJFrame extends JFrame {
         }
     }
 
-    class SelectionSortThread extends Thread{
+    static class SelectionSortThread extends Thread{
         @Override
         public void run(){
             sorting = true;
@@ -152,7 +155,7 @@ public class TJFrame extends JFrame {
         }
     }
 
-    class HeapSortThread extends Thread{
+    static class HeapSortThread extends Thread{
         @Override
         public void run(){
             sorting = true;
@@ -160,7 +163,7 @@ public class TJFrame extends JFrame {
         }
     }
 
-    class QuickSortThread extends Thread{
+    static class QuickSortThread extends Thread{
         @Override
         public void run(){
             sorting = true;
@@ -172,7 +175,7 @@ public class TJFrame extends JFrame {
         Maze.generateMaze(ArraySize);
 
         TJFrame frame = new TJFrame();
-        frame.setSize(1200,1000);
+        frame.setSize(900,700);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);

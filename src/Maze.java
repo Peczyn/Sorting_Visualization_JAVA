@@ -70,7 +70,7 @@ public class Maze {
             int min_idx = i;
             for (int j = i+1; j < n; j++){
                 try {
-                    Thread.sleep(5);
+                    Thread.sleep(2);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
