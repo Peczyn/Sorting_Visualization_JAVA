@@ -84,6 +84,23 @@ public class TJFrame extends JFrame {
         });
         northPanel.add(SelectionSort);
 
+        JButton HeapSort = new JButton("HeapSort Start");
+        HeapSort.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!sorting)
+                {
+                    (new HeapSortThread()).start();
+                    Maze.isRunning=true;
+                }
+                else{
+                    Maze.isRunning=true;
+                }
+
+            }
+        });
+        northPanel.add(HeapSort);
+
 
         JButton stop = new JButton("Stop");
         stop.addActionListener(new ActionListener() {
@@ -113,6 +130,14 @@ public class TJFrame extends JFrame {
         public void run(){
             sorting = true;
             Maze.selectionSort();
+        }
+    }
+
+    class HeapSortThread extends Thread{
+        @Override
+        public void run(){
+            sorting = true;
+            Maze.heapSort();
         }
     }
 
