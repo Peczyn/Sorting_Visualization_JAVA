@@ -24,13 +24,15 @@ public class TJFrame extends JFrame {
 
         JPanel northPanel = new JPanel();
 
-        Integer[] options = {10,50,100,200,300};
+        Integer[] options = {10,50,100,200,300,450};
         JComboBox<Integer> comboBox = new JComboBox<>(options);
+        comboBox.setSelectedItem(100);
         comboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Maze.arr.clear();
                 ArraySize = (int) comboBox.getSelectedItem();
+
                 Maze.generateMaze(ArraySize);
             }
         });
@@ -101,6 +103,23 @@ public class TJFrame extends JFrame {
         });
         northPanel.add(HeapSort);
 
+        JButton QuickSort = new JButton("QuickSort Start");
+        QuickSort.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!sorting)
+                {
+                    (new QuickSortThread()).start();
+                    Maze.isRunning=true;
+                }
+                else{
+                    Maze.isRunning=true;
+                }
+
+            }
+        });
+        northPanel.add(QuickSort);
+
 
         JButton stop = new JButton("Stop");
         stop.addActionListener(new ActionListener() {
@@ -138,6 +157,14 @@ public class TJFrame extends JFrame {
         public void run(){
             sorting = true;
             Maze.heapSort();
+        }
+    }
+
+    class QuickSortThread extends Thread{
+        @Override
+        public void run(){
+            sorting = true;
+            Maze.quickSort(0,Maze.arr.size()-1);
         }
     }
 

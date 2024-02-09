@@ -26,10 +26,14 @@ public class Maze {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                if(!isRunning) {
-                    j--;
+                while(!isRunning) {
+                    try {
+                        Thread.sleep(5);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-                else if (arr.get(j) > arr.get(j+1)) {
+                if(arr.get(j) > arr.get(j+1)) {
                     temp = arr.get(j);
                     arr.set(j,arr.get(j + 1));
                     arr.set(j + 1, temp);
@@ -52,13 +56,14 @@ public class Maze {
         for (int i = 0; i < n-1; i++)
         {
 
-
-
             /////TUTAJ DZIWNIE TO DZIALA BO JAK NIE DAM TEGO TRY ALBO JAKIEJKOLWIEK FUNKCJI PRZED TYM IF'EM
             /////TO WTEDY PO ZATRZYMANIU PROGRAM SPOWROTEM JUZ NIE IDZIE XD
-            if(!isRunning) {
-                i--;
-                continue;
+            while(!isRunning) {
+                try {
+                    Thread.sleep(5);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             // Find the minimum element in unsorted array
@@ -108,6 +113,13 @@ public class Maze {
     }
     static void heapify(ArrayList<Integer> arr, int N, int i)
     {
+        while(!isRunning) {
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
         int largest = i; // Initialize largest as root
         int l = 2 * i + 1; // left = 2*i + 1
         int r = 2 * i + 2; // right = 2*i + 2
@@ -144,6 +156,92 @@ public class Maze {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    static void swap(ArrayList<Integer> arr, int i, int j)
+    {
+        try {
+            Thread.sleep(5);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        int temp = arr.get(i);
+        arr.set(i,arr.get(j));
+        arr.set(j,temp);
+    }
+
+    // This function takes last element as pivot,
+    // places the pivot element at its correct position
+    // in sorted array, and places all smaller to left
+    // of pivot and all greater elements to right of pivot
+    static int partition(ArrayList<Integer> arr, int low, int high)
+    {
+        // Choosing the pivot
+
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+        int pivot = arr.get(high);
+
+        // Index of smaller element and indicates
+        // the right position of pivot found so far
+        int i = (low - 1);
+
+        for (int j = low; j <= high - 1; j++) {
+
+
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            // If current element is smaller than the pivot
+            if (arr.get(j) < pivot) {
+
+                // Increment index of smaller element
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i + 1, high);
+        return (i + 1);
+    }
+
+    // The main function that implements QuickSort
+    // arr[] --> Array to be sorted,
+    // low --> Starting index,
+    // high --> Ending index
+    static void quickSort(int low, int high)
+    {
+        while(!isRunning) {
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if (low < high) {
+
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            // pi is partitioning index, arr[p]
+            // is now at right place
+            int pi = partition(arr, low, high);
+
+            // Separately sort elements before
+            // partition and after partition
+            quickSort(low, pi - 1);
+            quickSort(pi + 1, high);
+        }
+        TJFrame.sorting = false;
     }
 
 }
