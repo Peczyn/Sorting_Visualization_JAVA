@@ -3,7 +3,6 @@ import java.util.Collections;
 
 public class Maze {
     static boolean isRunning = false;
-    static boolean[][] test = {{true,true,true,false,false},{false, false, true ,false,false},{true,true,true,false,false},{false, false, true ,false,false},{true, false, true ,false,false}};
     public static ArrayList<Integer> arr = new ArrayList<>();
 
     static void generateMaze(int n){
@@ -40,7 +39,7 @@ public class Maze {
                     swapped = true;
                 }
             }
-            if (swapped == false) {
+            if (!swapped) {
                 TJFrame.sorting = false;
                 break;
             }
@@ -55,9 +54,6 @@ public class Maze {
         // One by one move boundary of unsorted subarray
         for (int i = 0; i < n-1; i++)
         {
-
-            /////TUTAJ DZIWNIE TO DZIALA BO JAK NIE DAM TEGO TRY ALBO JAKIEJKOLWIEK FUNKCJI PRZED TYM IF'EM
-            /////TO WTEDY PO ZATRZYMANIU PROGRAM SPOWROTEM JUZ NIE IDZIE XD
             while(!isRunning) {
                 try {
                     Thread.sleep(5);
@@ -70,7 +66,7 @@ public class Maze {
             int min_idx = i;
             for (int j = i+1; j < n; j++){
                 try {
-                    Thread.sleep(2);
+                    Thread.sleep(1, 500);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
