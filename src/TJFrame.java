@@ -6,14 +6,12 @@ import java.util.Collections;
 
 public class TJFrame extends JFrame {
     public static boolean sorting = false;
-
     TJPanel tjpanel = new TJPanel();
     static int ArraySize = 100;
 
     TJFrame(){
         super("OKNO");
         buildGui();
-//        (new BubbleSortActive()).start();
     }
 
     void buildGui()
@@ -21,116 +19,59 @@ public class TJFrame extends JFrame {
         JPanel root = new JPanel();
         root.setLayout(new BorderLayout());
 
-
         JPanel northPanel = new JPanel();
 
         Integer[] options = {10,50,100,200,300,450};
         JComboBox<Integer> comboBox = new JComboBox<>(options);
         comboBox.setSelectedItem(100);
-        comboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(!sorting)
-                {
-                    Maze.arr.clear();
-                    ArraySize = (int) comboBox.getSelectedItem();
-
-                    Maze.generateMaze(ArraySize);
-                }
+        comboBox.addActionListener(e -> {
+            if(!sorting)
+            {
+                Maze.arr.clear();
+                ArraySize = (int) comboBox.getSelectedItem();
+                Maze.generateMaze(ArraySize);
             }
         });
         northPanel.add(comboBox);
 
         JButton ShuffleButton = new JButton("Shuffle");
-        ShuffleButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(!sorting)
-                {
-                    Collections.shuffle(Maze.arr);
-                }
-
-            }
+        ShuffleButton.addActionListener(e -> {
+            if(!sorting) Collections.shuffle(Maze.arr);
         });
         northPanel.add(ShuffleButton);
 
 
         JButton BubbleSort = new JButton("BubbleSort Start");
-        BubbleSort.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(!sorting)
-                {
-                    (new BubbleSortThread()).start();
-                    Maze.isRunning=true;
-                }
-                else{
-                    Maze.isRunning=true;
-                }
-            }
+        BubbleSort.addActionListener(e -> {
+            if(!sorting) (new BubbleSortThread()).start();
+            Maze.isRunning=true;
         });
         northPanel.add(BubbleSort);
 
 
         JButton SelectionSort = new JButton("SelectionSort Start");
-        SelectionSort.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(!sorting)
-                {
-                    (new SelectionSortThread()).start();
-                    Maze.isRunning=true;
-                }
-                else{
-                    Maze.isRunning=true;
-                }
-
-            }
+        SelectionSort.addActionListener(e -> {
+            if(!sorting) (new SelectionSortThread()).start();
+            Maze.isRunning=true;
         });
         northPanel.add(SelectionSort);
 
         JButton HeapSort = new JButton("HeapSort Start");
-        HeapSort.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(!sorting)
-                {
-                    (new HeapSortThread()).start();
-                    Maze.isRunning=true;
-                }
-                else{
-                    Maze.isRunning=true;
-                }
-
-            }
+        HeapSort.addActionListener(e -> {
+            if(!sorting) (new HeapSortThread()).start();
+            Maze.isRunning=true;
         });
         northPanel.add(HeapSort);
 
         JButton QuickSort = new JButton("QuickSort Start");
-        QuickSort.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(!sorting)
-                {
-                    (new QuickSortThread()).start();
-                    Maze.isRunning=true;
-                }
-                else{
-                    Maze.isRunning=true;
-                }
-
-            }
+        QuickSort.addActionListener(e -> {
+            if(!sorting) (new QuickSortThread()).start();
+            Maze.isRunning=true;
         });
         northPanel.add(QuickSort);
 
-
         JButton stop = new JButton("Stop");
-        stop.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Maze.isRunning=false;
-            }
-        });
+        stop.addActionListener(e -> Maze.isRunning=false);
         northPanel.add(stop);
 
         root.add(northPanel, BorderLayout.NORTH);
