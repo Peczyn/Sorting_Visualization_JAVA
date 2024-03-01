@@ -4,5 +4,5 @@
 javac src/*.java
 
 # Run the Main class
-java -cp src Main
+java -cp src TJFrame
 
