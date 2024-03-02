@@ -37,10 +37,6 @@ Contributions to this project are welcome! If you have ideas for new features, i
 ### License:
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
-
-Feel free to customize this template to better suit your project, and don't forget to update any placeholders such as `yourusername` with the appropriate information. Happy coding and exploring sorting algorithms!
-
  ### Some photos:
 <img width=49% alt="Sorting1" src="https://github.com/Peczyn/Sorting_Visualization_JAVA/assets/142744067/9f887373-ced5-4e3e-b823-1383be53ef46">
 <img width=49% alt="Sorting2" src="https://github.com/Peczyn/Sorting_Visualization_JAVA/assets/142744067/3eb92905-e417-4a37-ae9e-684735e9ffc1">
